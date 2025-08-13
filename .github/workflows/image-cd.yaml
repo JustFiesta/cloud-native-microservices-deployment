@@ -21,7 +21,7 @@ jobs:
       - name: Discover services
         id: discover_services
         run: |
-          SERVICES=$(find microservices-demo/src -mindepth 1 -maxdepth 1 -type d -exec test -f "{}/Dockerfile" \; -print | xargs -n1 basename || true)
+          SERVICES=$(find microservices-demo/src -mindepth 1 -maxdepth 2 -type d -exec test -f "{}/Dockerfile" \; -print | xargs -n1 basename || true)
           if [ -z "$SERVICES" ]; then
             echo "  No Dockerfiles found in microservices-demo/src"
             SERVICES_JSON="[]"

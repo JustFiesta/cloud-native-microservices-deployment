@@ -29,6 +29,7 @@ jobs:
             SERVICES_JSON=$(echo "$SERVICES" | jq -R . | jq -sc .)
           fi
           
+          echo "====================================="
           echo "    Detected services: $SERVICES_JSON"
           echo "====================================="
           echo "services=$SERVICES_JSON" >> "$GITHUB_OUTPUT"

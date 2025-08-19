@@ -30,13 +30,13 @@ RUN dotnet publish "src/cartservice.csproj" \
 FROM gcr.io/distroless/cc-debian12 AS runtime
 
 WORKDIR /App
-COPY --from=build /App/out .
+COPY --chown=1000:1000 --from=build /App/out .
 
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 \
     DOTNET_EnableDiagnostics=0 \
     ASPNETCORE_HTTP_PORTS=7070
 
 EXPOSE 7070 
-USER nonroot:nonroot
+USER 1000:1000
 
 ENTRYPOINT ["/App/cartservice"]

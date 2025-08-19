@@ -1,4 +1,9 @@
-FROM gradle:ubi-minimal AS build
+FROM --platform=$BUILDPLATFORM gradle:ubi-minimal AS build
+
+ARG TARGETOS=linux
+ARG TARGETARCH=x64
+ARG TARGETRID=${TARGETOS}-${TARGETARCH}
+ARG TARGETPLATFORM
 
 WORKDIR /app
 COPY . .
@@ -29,4 +34,6 @@ ENV JAVA_HOME=/app/jre
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 EXPOSE 9555
+USER nonroot:nonroot
+
 ENTRYPOINT ["/app/bin/AdService"]

@@ -11,6 +11,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS runtime
 WORKDIR /App
 COPY --from=build /App/out .
 
-RUN ls -la > /App/files.txt
-
 ENTRYPOINT ["dotnet", "cartservice.dll"]

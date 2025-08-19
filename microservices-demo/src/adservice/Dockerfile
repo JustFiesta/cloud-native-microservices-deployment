@@ -27,13 +27,13 @@ FROM debian:bookworm-slim@sha256:b1a741487078b369e78119849663d7f1a5341ef2768798f
 
 WORKDIR /app
 
-COPY --from=build /min-app-jre /app/jre
-COPY --from=build /app/build/install/hipstershop /app
+COPY --chown=1000:1000 --from=build /min-app-jre /app/jre
+COPY --chown=1000:1000 --from=build /app/build/install/hipstershop /app
 
 ENV JAVA_HOME=/app/jre
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 EXPOSE 9555
-USER nonroot:nonroot
+USER 1000:1000
 
 ENTRYPOINT ["/app/bin/AdService"]

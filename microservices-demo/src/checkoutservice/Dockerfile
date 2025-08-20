@@ -1,7 +1,7 @@
 FROM --platform=$BUILDPLATFORM golang:tip-trixie@sha256:adc08dd4cdb8e208743beb974a5ccf57ec365802bbd4ecee64ec61e1409d83f8 AS build
 
-ARG TARGETOS=linux
-ARG TARGETARCH=x64
+ARG TARGETOS
+ARG TARGETARCH
 
 WORKDIR /app
 COPY . .

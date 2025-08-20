@@ -17,4 +17,4 @@ COPY --chown=1000:1000 --from=build /app/checkoutservice /
 EXPOSE 5050
 USER 1000:1000
 
-CMD [ "/checkoutservice" ]
+ENTRYPOINT [ "/checkoutservice" ]

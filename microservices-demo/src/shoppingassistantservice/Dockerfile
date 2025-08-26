@@ -5,12 +5,10 @@ ARG TARGETARCH=amd64
 
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get upgrade \
-    && apt-get install -y g++
+RUN apt-get install -y --no-install-recommends g++
 
 COPY requirements.txt .
-RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . .
 
@@ -18,9 +16,7 @@ FROM python:3.12.11-slim@sha256:d67a7b66b989ad6b6d6b10d428dcc5e0bfc3e5f88906e67d
 
 WORKDIR /app
 
-COPY --chown=1000:1000 --from=build /wheels /wheels
-RUN pip install --no-cache-dir /wheels/*
-
+COPY --chown=1000:1000 --from=build /usr/local/lib/python3.12 /usr/local/lib/python3.12/
 COPY --chown=1000:1000 --from=build /app /app
 
 ENV PORT=8080

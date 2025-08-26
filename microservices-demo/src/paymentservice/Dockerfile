@@ -4,9 +4,9 @@ ARG TARGETOS=linux
 ARG TARGETARCH=x64
 
 WORKDIR /app
-COPY package.json .
+COPY package*.json ./
 
-RUN npm install --production
+RUN npm ci --only=production
 
 COPY server.js ./
 COPY proto ./proto
